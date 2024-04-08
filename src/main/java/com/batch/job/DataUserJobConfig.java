@@ -1,7 +1,7 @@
 package com.batch.job;
 
-import com.batch.mapper.ZipCodeMapper;
-import com.batch.entity.ZipCode;
+import com.batch.entity.DataUser;
+import com.batch.mapper.DataUserMapper;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableBatchProcessing
-public class ZipCodeJobConfig {
+public class DataUserJobConfig {
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
 
@@ -32,18 +32,18 @@ public class ZipCodeJobConfig {
     public DataSource dataSource;
 
     @Bean
-    public FlatFileItemReader<ZipCode> personItemReader() {
-        FlatFileItemReader<ZipCode> reader = new FlatFileItemReader<>();
+    public FlatFileItemReader<DataUser> personItemReader() {
+        FlatFileItemReader<DataUser> reader = new FlatFileItemReader<>();
         reader.setLinesToSkip(1);
-        reader.setResource(new ClassPathResource("data.csv"));
+        reader.setResource(new ClassPathResource("data_user.csv"));
 
-        DefaultLineMapper<ZipCode> customerLineMapper = new DefaultLineMapper<>();
+        DefaultLineMapper<DataUser> customerLineMapper = new DefaultLineMapper<>();
 
         DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
-        tokenizer.setNames(new String[]{"Zip_Code", "Official_USPS_city_name", "Official_USPS_State_Code", "Official_State_Name", "ZCTA", "ZCTA_parent", "Population", "Density", "Primary_Official_County_Code", "Primary_Official_County_Name", "Official_County_Name", "Official_County_Code", "Imprecise", "Military", "Timezone", "Geo_Point"});
+        tokenizer.setNames(new String[]{"Name", "City", "Code"});
         tokenizer.setDelimiter(";");
         customerLineMapper.setLineTokenizer(tokenizer);
-        customerLineMapper.setFieldSetMapper(new ZipCodeMapper());
+        customerLineMapper.setFieldSetMapper(new DataUserMapper());
         customerLineMapper.afterPropertiesSet();
         reader.setLineMapper(customerLineMapper);
         return reader;
@@ -51,11 +51,11 @@ public class ZipCodeJobConfig {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Bean
-    public JdbcBatchItemWriter<ZipCode> personItemWriter() {
-        JdbcBatchItemWriter<ZipCode> itemWriter = new JdbcBatchItemWriter<>();
+    public JdbcBatchItemWriter<DataUser> personItemWriter() {
+        JdbcBatchItemWriter<DataUser> itemWriter = new JdbcBatchItemWriter<>();
 
         itemWriter.setDataSource(this.dataSource);
-        itemWriter.setSql("INSERT INTO zipcodes VALUES (:id, :zipCode, :cityName, :stateName)");
+        itemWriter.setSql("INSERT INTO users VALUES (:name, :city, :code)");
         itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider());
         itemWriter.afterPropertiesSet();
 
@@ -63,9 +63,9 @@ public class ZipCodeJobConfig {
     }
 
     @Bean
-    public Step step1() {
-        return stepBuilderFactory.get("step1")
-                .<ZipCode, ZipCode>chunk(1000)
+    public Step stepAddData() {
+        return stepBuilderFactory.get("Step Add Data")
+                .<DataUser, DataUser>chunk(1000)
                 .reader(personItemReader())
                 .writer(personItemWriter())
                 .build();
@@ -74,7 +74,7 @@ public class ZipCodeJobConfig {
     @Bean
     public Job job() {
         return jobBuilderFactory.get("job")
-                .start(step1())
+                .start(stepAddData())
                 .build();
     }
 
