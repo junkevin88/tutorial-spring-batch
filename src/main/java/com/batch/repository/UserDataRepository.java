@@ -1,8 +1,8 @@
-package com.frugalis.repository;
+package com.batch.repository;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ZipCodeRepository {
+public interface UserDataRepository {
     void saveAll();
 }
