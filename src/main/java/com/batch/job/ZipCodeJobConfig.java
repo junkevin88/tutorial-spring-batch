@@ -1,7 +1,7 @@
-package com.frugalis;
+package com.batch.job;
 
-import com.frugalis.batchconfig.ZipCodeMapper;
-import com.frugalis.entity.ZipCode;
+import com.batch.mapper.ZipCodeMapper;
+import com.batch.entity.ZipCode;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -40,8 +40,8 @@ public class ZipCodeJobConfig {
         DefaultLineMapper<ZipCode> customerLineMapper = new DefaultLineMapper<>();
 
         DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
-        tokenizer.setNames(new String[] {"Zip_Code","Official_USPS_city_name","Official_USPS_State_Code","Official_State_Name","ZCTA","ZCTA_parent","Population","Density","Primary_Official_County_Code","Primary_Official_County_Name","Official_County_Name","Official_County_Code","Imprecise","Military","Timezone","Geo_Point"});
-tokenizer.setDelimiter(";");
+        tokenizer.setNames(new String[]{"Zip_Code", "Official_USPS_city_name", "Official_USPS_State_Code", "Official_State_Name", "ZCTA", "ZCTA_parent", "Population", "Density", "Primary_Official_County_Code", "Primary_Official_County_Name", "Official_County_Name", "Official_County_Code", "Imprecise", "Military", "Timezone", "Geo_Point"});
+        tokenizer.setDelimiter(";");
         customerLineMapper.setLineTokenizer(tokenizer);
         customerLineMapper.setFieldSetMapper(new ZipCodeMapper());
         customerLineMapper.afterPropertiesSet();
@@ -49,7 +49,7 @@ tokenizer.setDelimiter(";");
         return reader;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Bean
     public JdbcBatchItemWriter<ZipCode> personItemWriter() {
         JdbcBatchItemWriter<ZipCode> itemWriter = new JdbcBatchItemWriter<>();

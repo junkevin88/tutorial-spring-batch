@@ -1,6 +1,6 @@
-package com.frugalis.batchconfig;
+package com.batch.mapper;
 
-import com.frugalis.entity.ZipCode;
+import com.batch.entity.ZipCode;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;

@@ -1,4 +1,4 @@
-package com.frugalis.repository;
+package com.batch.repository;
 
 import org.springframework.stereotype.Repository;
 
