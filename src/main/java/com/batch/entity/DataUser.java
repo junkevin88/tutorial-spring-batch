@@ -2,11 +2,14 @@ package com.batch.entity;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Table(name = "users")
 @Data
+@Entity
+@NoArgsConstructor
 public class DataUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
