@@ -1,0 +1,12 @@
+{"namespace": "com.batch.entity.discount",
+  "type": "record",
+  "name": "Discount",
+  "fields": [
+//    {"name": "id", "type": "long"},
+    {"name": "age", "type": "int"},
+    {"name": "destination_region", "type": "string"},
+//    {"name": "destination_airport", "type": "string"},
+//    {"name": "price", "type": "float"},
+//    {"name": "frequent_traveller", "type": "int"}
+  ]
+}
