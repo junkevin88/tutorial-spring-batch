@@ -47,7 +47,7 @@ public class AvroFileGenerationJobConfig {
                                ItemReader<DataUser> userReader,
                                ItemWriter<GenericRecord> avroWriter) throws Exception {
         return steps.get("userToAvroStep")
-                .<DataUser, GenericRecord>chunk(10000) // Adjust chunk size as needed
+                .<DataUser, GenericRecord>chunk(100000) // Adjust chunk size as needed
                 .reader(userReader)
                 .writer(avroWriter)
                 .build();
