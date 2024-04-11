@@ -1,2 +1,3 @@
-# tutorial-spring-batch
-ehe.
+# Leveraging Spring Batch and Apache Avro for Data Conversion
+In today's data-driven world, organizations are constantly faced with the challenge of efficiently processing and converting vast amounts of data into various formats for analysis, storage, and exchange. Whether it's migrating data between systems, transforming raw data into a structured format, or preparing data for downstream applications, the ability to handle data conversion tasks effectively is important.
+One powerful solution that has gained widespread recognition for its robust batch processing capabilities is Spring Batch. Paired with the versatility of Avro, a compact and efficient data serialization system, Spring Batch offers a seamless pathway for converting data into Avro files.
