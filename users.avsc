@@ -1,9 +1,0 @@
-{
-  "type": "record",
-  "name": "User",
-  "fields": [
-    {"name": "name", "type": "string"},
-    {"name": "country", "type": "string"},
-    {"name": "code", "type": "int"}
-  ]
-}

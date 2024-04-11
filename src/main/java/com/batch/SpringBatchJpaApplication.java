@@ -15,7 +15,6 @@ import java.util.UUID;
 
 @EnableBatchProcessing
 @SpringBootApplication
-
 public class SpringBatchJpaApplication implements CommandLineRunner {
 	@Autowired
 	private JobLauncher jobLauncher;
