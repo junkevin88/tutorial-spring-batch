@@ -39,8 +39,6 @@ public class AvroFileGenerationJobConfig {
                 .build();
     }
 
-//    private Tasklet avroToCsvService() {
-//    }
 
     @Bean
     public Step userToAvroStep(StepBuilderFactory steps,
@@ -53,6 +51,4 @@ public class AvroFileGenerationJobConfig {
                 .build();
     }
 
-    // Define beans for userReader (reading users in batches) and avroWriter (converting and writing Avro records)
-    // ... (implementation details below)
 }
